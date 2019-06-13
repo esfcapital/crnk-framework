@@ -17,6 +17,9 @@ public class ProjectProxy implements ResourceProxy {
 	@JsonApiId
 	private Long id;
 
+	@JsonProperty
+	private String name;
+
 	private Map<String, JsonNode> attributes = new HashMap<>();
 
 	@JsonApiLinksInformation
@@ -44,5 +47,13 @@ public class ProjectProxy implements ResourceProxy {
 
 	public void setAttributes(Map<String, JsonNode> attributes) {
 		this.attributes = attributes;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

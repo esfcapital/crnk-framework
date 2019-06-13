@@ -13,9 +13,9 @@ public class ProjectTestDataLoader {
 
 	@PostConstruct
 	public void setup() {
-		projectRepository.save(new Project(121L, "Great Project"));
-		projectRepository.save(new Project(122L, "Crnk Project"));
-		projectRepository.save(new Project(123L, "Some Project"));
-		projectRepository.save(new Project(124L, "JSON API Project"));
+		projectRepository.save(new Project(121L, "Great Project", "P1", "Mike"));
+		projectRepository.save(new Project(122L, "Crnk Project", "P1", "Nick"));
+		projectRepository.save(new Project(123L, "Some Project", "P2", "Tim"));
+		projectRepository.save(new Project(124L, "JSON API Project", "P2", "John"));
 	}
 }

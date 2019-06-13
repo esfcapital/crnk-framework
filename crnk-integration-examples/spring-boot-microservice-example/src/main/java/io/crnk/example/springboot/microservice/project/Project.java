@@ -15,6 +15,12 @@ public class Project {
 	@JsonProperty
 	private String name;
 
+	@JsonProperty
+	private String programme;
+
+	@JsonProperty
+	private String businessSponsor;
+
 	/**
 	 * Links information necessary on objects to maintain urls from original microservice.
 	 */
@@ -24,9 +30,11 @@ public class Project {
 	public Project() {
 	}
 
-	public Project(Long id, String name) {
+	public Project(Long id, String name, String programme, String businessSponsor) {
 		this.id = id;
 		this.name = name;
+		this.programme = programme;
+		this.businessSponsor = businessSponsor;
 	}
 
 	public Long getId() {
@@ -43,6 +51,22 @@ public class Project {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getProgramme() {
+		return programme;
+	}
+
+	public void setProgramme(String programme) {
+		this.programme = programme;
+	}
+
+	public String getBusinessSponsor() {
+		return businessSponsor;
+	}
+
+	public void setBusinessSponsor(String businessSponsor) {
+		this.businessSponsor = businessSponsor;
 	}
 
 	public DefaultSelfLinksInformation getLinks() {

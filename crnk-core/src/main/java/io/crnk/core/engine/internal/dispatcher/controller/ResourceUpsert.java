@@ -32,6 +32,7 @@ import io.crnk.core.exception.RepositoryNotFoundException;
 import io.crnk.core.exception.RequestBodyException;
 import io.crnk.core.exception.ResourceException;
 import io.crnk.core.repository.response.JsonApiResponse;
+import io.crnk.core.resource.meta.ResourceProxy;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -164,7 +165,8 @@ public abstract class ResourceUpsert extends ResourceIncludeField {
                         value = filter.modifyAttribute(instance, field, attributeName, value);
                     }
                     field.getAccessor().setValue(instance, value);
-                } else if (resourceInformation.getAnyFieldAccessor() != null) {
+                }
+                else if (resourceInformation.getAnyFieldAccessor() != null) {
                     AnyResourceFieldAccessor anyFieldAccessor = resourceInformation.getAnyFieldAccessor();
                     Object value = objectMapper.reader().forType(Object.class).readValue(valueNode);
                     for (ResourceModificationFilter filter : modificationFilters) {
@@ -172,6 +174,11 @@ public abstract class ResourceUpsert extends ResourceIncludeField {
                     }
                     anyFieldAccessor.setValue(instance, attributeName, value);
                 }
+                else if (instance instanceof ResourceProxy){
+                	ResourceProxy proxy = (ResourceProxy)instance;
+                	proxy.getAttributes().put(attributeName, valueNode);
+                }
+
             } catch (IOException e) {
                 throw new ResourceException(
                         String.format("Exception while setting %s.%s=%s due to %s", instance, attributeName, valueNode,

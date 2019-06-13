@@ -102,14 +102,7 @@ class ClientResourceUpsert extends ResourceUpsert {
             Object object = newEntity(resourceInformation, resource);
             setId(resource, object, resourceInformation);
 
-            if (object instanceof ResourceProxy){
-	            ResourceProxy proxy = (ResourceProxy)object;
-	            proxy.setAttributes(resource.getAttributes());
-            }
-            else{
-	            setAttributes(resource, object, resourceInformation, new QueryContext());
-            }
-            
+	        setAttributes(resource, object, resourceInformation, new QueryContext());
             setLinks(resource, object, resourceInformation);
             setMeta(resource, object, resourceInformation);
 
