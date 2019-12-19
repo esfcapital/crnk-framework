@@ -5,9 +5,7 @@ import io.crnk.core.module.Module;
 import io.crnk.core.repository.ResourceRepository;
 import io.crnk.core.repository.decorate.WrappedResourceRepository;
 import io.crnk.core.resource.annotations.JsonApiExposed;
-import io.crnk.core.resource.proxy.ProxyResource;
 import io.crnk.example.springboot.proxied.microservice.ProxiedMicroServiceApplication;
-import io.crnk.example.springboot.proxied.microservice.project.Project;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -31,7 +29,7 @@ public class TaskProjectLinkerModule implements Module {
     }
 
     @JsonApiExposed(false)
-    class ProxiedMicroServiceRepository<T extends ProxyResource, I> extends WrappedResourceRepository<T, I> {
+    class ProxiedMicroServiceRepository<T, I> extends WrappedResourceRepository<T, I> {
 
         public ProxiedMicroServiceRepository(ResourceRepository<T, I> remoteRepository) {
             super(remoteRepository);

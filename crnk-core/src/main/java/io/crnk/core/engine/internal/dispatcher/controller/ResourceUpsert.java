@@ -54,7 +54,6 @@ import io.crnk.core.resource.ResourceTypeHolder;
 import io.crnk.core.resource.list.DefaultResourceList;
 import io.crnk.core.resource.meta.JsonLinksInformation;
 import io.crnk.core.resource.meta.JsonMetaInformation;
-import io.crnk.core.resource.proxy.ProxyResource;
 
 public abstract class ResourceUpsert extends ResourceIncludeField {
 
@@ -225,10 +224,6 @@ public abstract class ResourceUpsert extends ResourceIncludeField {
 						value = filter.modifyAttribute(instance, field, attributeJsonName, value);
 					}
 					anyFieldAccessor.setValue(instance, attributeJsonName, value);
-				}
-				else if (instance instanceof ProxyResource){
-					ProxyResource proxy = (ProxyResource)instance;
-					proxy.getAttributes().put(attributeJsonName, valueNode.textValue());
 				}
 				else if(!isClient()) {
 					throw new BadRequestException(String.format("attribute %s not found", attributeJsonName));

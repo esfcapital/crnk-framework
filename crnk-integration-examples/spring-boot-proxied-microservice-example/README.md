@@ -1,15 +1,15 @@
 # spring-boot-proxied-microservice-example
 
 Builds on the Spring boot microservice examples and removes the need for the consuming service 
-have any knowledge of the structure of the remote resource.
+have any/complete knowledge of the structure of the remote resource.
 
 One service serves projects, while the other tasks. A JSON:API relationship is introduced
-between task and project that spans over the two underlying services.
+between task and project which spans the two services.
 
-The Task Service using a 'Proxy Resource' that enables it to report the linked Project. 
-Known properties are mapped. Not matching properties are added to the attributes map. 
+The Task Service uses a Project 'proxy resource'. This has a map decorated with @JsonAnyGetter/@JsonAnySetter.
+to store any property returned from the remote resource that an not known to the client.
 
-
+Known properties are mapped. None matching properties are added to the attributes map. 
 
 In order to run this example do:
 

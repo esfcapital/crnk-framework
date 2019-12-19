@@ -1,17 +1,17 @@
 package io.crnk.example.springboot.proxied.microservice.task;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
 import io.crnk.core.resource.annotations.*;
 import io.crnk.core.resource.links.DefaultSelfLinksInformation;
-import io.crnk.core.resource.proxy.ProxyResource;
-import io.crnk.example.springboot.proxied.microservice.project.Project;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @JsonApiResource(type = "project")
-public class ProjectProxy implements ProxyResource {
+public class ProjectProxy  {
 
 	@JsonApiId
 	private Long id;
@@ -19,7 +19,7 @@ public class ProjectProxy implements ProxyResource {
 	@JsonProperty
 	private String name;
 
-	@JsonProperty
+	@JsonIgnore
 	private Map<String, String> attributes = new HashMap<>();
 
 	/**
@@ -29,14 +29,19 @@ public class ProjectProxy implements ProxyResource {
 	private DefaultSelfLinksInformation links = new DefaultSelfLinksInformation();
 
 
-	@Override
+
+	@JsonAnyGetter
 	public Map<String, String> getAttributes() {
 		return attributes;
 	}
 
-	@Override
-	public void setAttributes(Map<String, String> attributes) {
-		this.attributes = attributes;
+
+	@JsonAnySetter
+	public void setProperty(String key, String value) {
+		if ("notAllowed".equals(key)) {
+			throw new IllegalStateException();
+		}
+		this.attributes.put(key, value);
 	}
 
 	public DefaultSelfLinksInformation getLinks() {
